@@ -166,26 +166,28 @@
 
 'use client';
 
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { askQuestion } from '@/lib/actions/ask.actions';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import ReactMarkdown from 'react-markdown';
 
-export default function ChatPage({ params }: { params: { repoId: string } }) {
+export default function ChatPage(props: { params: Promise<{ repoId: string }> }) {
     const [question, setQuestion] = useState('');
     const [streamResponse, setStreamResponse] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const { repoId } = use(props.params);
 
     async function handleSubmit() {
         setLoading(true);
         setStreamResponse('');
 
-        const output = await askQuestion(question, params.repoId);
-        
+        const textStream = await askQuestion(question, repoId);
+
         //@ts-ignore
-        for await (const chunk of output) {
+        for await (const chunk of textStream) {
             setStreamResponse(prev => prev + chunk);
         }
 

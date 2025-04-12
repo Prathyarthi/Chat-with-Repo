@@ -49,13 +49,13 @@ export async function askQuestion(question: string, repoId: string) {
         `
     });
 
-    (async () => {
-        for await (const delta of textStream) {
-            stream.update(delta)
-        }
+    // (async () => {
+    //     for await (const delta of textStream) {
+    //         stream.update(delta)
+    //     }
 
-        stream.done();
-    })()
+    //     stream.done();
+    // })()
 
-    return stream.value;
+    return textStream;
 }
