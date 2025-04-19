@@ -186,7 +186,6 @@ export default function ChatPage(props: { params: Promise<{ repoId: string }> })
 
         const textStream = await askQuestion(question, repoId);
 
-        //@ts-ignore
         for await (const chunk of textStream) {
             setStreamResponse(prev => prev + chunk);
         }

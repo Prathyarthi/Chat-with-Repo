@@ -157,12 +157,11 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "postgresql://prathyarti:td9uy6FvWNal@ep-fancy-darkness-a5npjekx.us-east-2.aws.neon.tech/chat-with-repo?sslmode=require"
       }
     }
   },
